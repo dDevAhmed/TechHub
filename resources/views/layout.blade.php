@@ -24,6 +24,7 @@
         <div class="flex items-center text-white">
             <a href="/">
                 <img src="{{ asset('/assets/img/logo_landscape.png') }}" alt="TechHub Logo" class="h-10">
+                {{-- fixme - logo size --}}
             </a>
         </div>
         <div class="text-md">

@@ -19,17 +19,17 @@
 
             {{-- cards --}}
             <div class="flex gap-4 justify-between mt-10">
-                <div class="shadow p-5 bg-gray-100 item-center">
+                <div class="shadow-md p-5 item-center">
                     <i class="fa-solid fa-search text-blue-700"></i>
                     <h3 class="font-semibold mt-3">Get Hired</h3>
                     <p class="">Find cool Jobs that suit your needs...</p>
                 </div>
-                <div class="shadow p-5 bg-gray-100 items-center ">
+                <div class="shadow-md p-5 items-center ">
                     <i class="fa-solid fa-users text-blue-700"></i>
                     <h3 class="font-semibold mt-3">Share Ideas</h3>
                     <p class="">Network and build cool stuffs with like minded...</p>
                 </div>
-                <div class="shadow p-5 bg-gray-100 items-center ">
+                <div class="shadow-md p-5 items-center ">
                     <i class="fa-solid fa-newspaper text-blue-700"></i>
                     <h3 class=" font-semibold mt-3">Stay Updated</h3>
                     <p class="">Follow the latest happenings in the industry...</p>

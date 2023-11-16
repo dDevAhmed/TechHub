@@ -20,11 +20,10 @@
 
 <body class="font-sans w-full">
     {{-- night mode = #1C1B22; --}}
-    <nav class="flex items-center justify-between flex-wrap bg-blue-700 p-6 shadow-lg sticky top-0">
+    <nav class="flex items-center justify-between flex-wrap bg-blue-700 p-6 shadow-lg sticky top-0 z-10">
         <div class="flex items-center text-white">
             <a href="/">
-                👨‍💻
-                <span class="font-bold text-xl">TechHub</span>
+                <img src="{{ asset('/assets/img/logo_landscape.png') }}" alt="TechHub Logo" class="h-10">
             </a>
         </div>
         <div class="text-md">

@@ -75,7 +75,7 @@
 
                             <div class="header -mt-2">
                                 <div class="header-level-1 flex justify-between">
-                                    <h3 class="text-xl"><a href="/job/{{ $jobListing->job_id }}" class="text-blue-700 font-bold">{{ $jobListing->title }}</a></h3>
+                                    <h3 class="text-xl"><a href="/job/{{ $jobListing->job_id }}" class="text-blue-700 font-semibold">{{ $jobListing->title }}</a></h3>
                                     {{-- todo - wrap title --}}
                                     <div class="flex gap-3">
                                         <a href="#" class="text-gray-400 hover:text-gray-700" title="save"><i class="fa-solid fa-bookmark"></i></a>

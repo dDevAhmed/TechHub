@@ -44,7 +44,7 @@ use App\Http\Controllers\JobListingController;
 
 // app domains
 Route::get('/', [AppController::class, 'home'])->name('home');
-Route::get('/search', [AppController::class, 'search'])->name('search');
+Route::get('/results', [AppController::class, 'results'])->name('results');
 
 
 // job listing routes
@@ -54,7 +54,7 @@ Route::controller(JobListingController::class)->group(function () {
         'index'
     )->name('job.index');
 
-    Route::get('/job/{job}', 'showJobListing');
+    Route::get('/job/{job}', 'showJobListing')->name('job.showJobListing');
     Route::get('/add-listing', 'createJobListing');
     Route::post(
         '/add-listing',

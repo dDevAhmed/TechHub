@@ -10,12 +10,13 @@
             <div class="border border--gray-500 shadow-lg flex items-center mt-12 p-0">
                 <i class="fa-solid fa-search p-3 text-gray-700"></i>
                 <input type="text" name="searchInput" id="searchInput" class="p-2 flex-grow outline-none"
-                    placeholder="search for jobs, resources, communities and more..." onfocus="this.val='' " autofocus>
+                    placeholder="search for jobs, resources, communities and more..." onfocus="this.value=''" autofocus>
                 <button id="searchButton"
                     class="bg-gray-100 font-semibold px-5 py-2 hover:bg-blue-700 hover:text-white m-0">Search</button>
+                <div id="searchSuggestions" class="absolute z-50 bg-white border border--gray-200 p-2 hidden">
+                    <ul id="suggestionList" class="list-none"></ul>
+                </div>
             </div>
-
-            <div id="search_list"></div>
 
             {{-- cards --}}
             <div class="flex gap-4 justify-between mt-10">
@@ -39,61 +40,68 @@
     </div>
 
 
-    {{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="https://cdn.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script> --}}
-    {{-- <script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
+    <script>
         $(document).ready(function() {
-            $('#search').on('keyup', function() {
-                var query = $(this).val();
+            var $searchInput = $('#searchInput');
+            var $suggestionList = $('#suggestionList');
+            var suggestions = [];
 
-                    $.ajax({
-                        url: '/search',
-                        type: 'GET',
-                        data: {
-                            'search': query
-                        },
-                        success: function(data) {
-                            $('search_list').html(data);
-                        }
-                    });
+            $searchInput.on('keyup', function() {
+                var searchQuery = $(this).val().toLowerCase();
 
-                // fetchSearchResults(query);
+                if (searchQuery === '') {
+                    $suggestionList.addClass('hidden');
+                    return;
+                }
+
+                // Fetch suggestions from database using AJAX
+                $.ajax({
+                    url: '/',
+                    method: 'GET',
+                    data: {
+                        query: searchQuery
+                    },
+                    success: function(response) {
+                        suggestions = response.suggestions;
+                        updateSuggestionsList();
+                    }
+                });
+
             });
 
-            // $('#searchButton').on('click', function() {
-            //     const query = $('#searchInput').val();
-            //     fetchSearchResults(query);
-            // });
+            $('#searchButton').on('click', function() {
+                var searchQuery = $searchInput.val();
 
-            // function fetchSearchResults(query) {
-            //     if (query.length > 2) {
-            //         $.ajax({
-            //             url: '/search',
-            //             type: 'GET',
-            //             data: {
-            //                 query: query
-            //             },
-            //             success: function(data) {
-            //                 displayResults(data);
-            //             }
-            //         });
-            //     } else {
-            //         $('#searchResults').empty();
-            //     }
-            // }
+                if (searchQuery !== '') {
+                    // Redirect to results page with the search query
+                    window.location.href = '/search?query=' + searchQuery;
+                }
+            });
 
-            // function displayResults(results) {
-            //     const list = $('#searchResults');
-            //     list.empty();
+            function updateSuggestionsList() {
+                $suggestionList.empty();
 
-            //     if (results.length > 0) {
-            //         results.forEach(function(result) {
-            //             list.append('<li>' + result.title + '</li>');
-            //         });
-            //     } else {
-            //         list.append('<li>No results found</li>');
-            //     }
-            // }
+                for (var i = 0; i < suggestions.length; i++) {
+                    var suggestion = suggestions[i];
+                    var suggestionItem = $('<li class="text-gray-700 cursor-pointer py-2">' + suggestion + '</li>');
+                    suggestionItem.on('click', function() {
+                        $searchInput.val(suggestion);
+                        $suggestionList.addClass('hidden');
+
+                        // Perform actual search based on the selected suggestion
+                        // ...
+                    });
+
+                    $suggestionList.append(suggestionItem);
+                }
+
+                if (suggestions.length > 0) {
+                    $suggestionList.removeClass('hidden');
+                }
+            }
         });
-    </script> --}}
+    </script>
 @endsection

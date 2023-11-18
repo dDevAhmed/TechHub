@@ -52,8 +52,7 @@
                             </select>
                         </div>
                     </div>
-                    <button type="button" class="block w-full bg-blue-700 text-white hover:bg-blue-800 mt-6 py-2">Apply</button>
-    
+                    <button type="button" class="block w-full bg-blue-700 text-white hover:bg-gray-700 mt-6 py-2">Apply</button>
                 </div>
                 <a href="#">    {{-- todo - subscribe modal --}}
                     <div class="shadow-md p-5 flex flex-col items-center">
@@ -72,15 +71,15 @@
             <main>
                 @unless ($jobListings->count() == 0)
                     @foreach ($jobListings as $jobListing)
-                        <div class="block px-3 py-1 mb-7 border-2 border-s-gray-200 border-t-0 border-b-0 border-r-0 hover:border-s-blue-700 items-center" id="job-listing-div">
+                        <div class="block px-3 py-1 mb-7 border-2 border-s-gray-300 border-t-0 border-b-0 border-r-0 hover:border-s-blue-700 items-center" id="job-listing-div">
 
                             <div class="header -mt-2">
                                 <div class="header-level-1 flex justify-between">
                                     <h3 class="text-xl"><a href="/job/{{ $jobListing->job_id }}" class="text-blue-700 font-bold">{{ $jobListing->title }}</a></h3>
                                     {{-- todo - wrap title --}}
                                     <div class="flex gap-3">
-                                        <a href="#" class="text-gray-300 hover:text-gray-700" title="save"><i class="fa-solid fa-heart"></i></a>
-                                        <a href="#" class="text-gray-300 hover:text-gray-700" title="share"><i class="fa-solid fa-share-nodes"></i></a>
+                                        <a href="#" class="text-gray-400 hover:text-gray-700" title="save"><i class="fa-solid fa-bookmark"></i></a>
+                                        <a href="#" class="text-gray-400 hover:text-gray-700" title="share"><i class="fa-solid fa-share-nodes"></i></a>
                                     </div>
                                 </div>
                                 <p class="header-level-2 flex gap-3 font-light mt-1">
@@ -117,20 +116,20 @@
                             <x-job-listing-tags :jobListingTagsCsv="$jobListing->tags" />
                         </div>
                     @endforeach
+
+                    <nav aria-label="Page navigation example" class="mt-10 block w-full">
+                        <ul class="flex gap-2 justify-center">
+                          <li class="bg-gray-100 py-1 px-3 hover:bg-gray-700 hover:text-white"><a class="" href="#">Previous</a></li>
+                          <li class="bg-blue-700 text-white py-1 px-3 hover:bg-gray-700 hover:text-white"><a class="" href="#">1</a></li>
+                          <li class="bg-gray-100 py-1 px-3 hover:bg-gray-700 hover:text-white"><a class="" href="#">2</a></li>
+                          <li class="bg-gray-100 py-1 px-3 hover:bg-gray-700 hover:text-white"><a class="" href="#">3</a></li>
+                          <li class="bg-gray-100 py-1 px-3 hover:bg-gray-700 hover:text-white"><a class="" href="#">Next</a></li>
+                        </ul>
+                    </nav>
                 @else
                     <h3 class="text-center no-job-listings-title mt-3">No Job Listings</h3>
                 @endunless
 
-                {{-- todo - pagination buttons <div class=""></div> --}}      
-                <nav aria-label="Page navigation example" class="mt-5 block w-full">
-                    <ul class="flex gap-2 justify-center">
-                      <li class="bg-gray-100 py-1 px-3 hover:bg-gray-700 hover:text-white"><a class="" href="#">Previous</a></li>
-                      <li class="bg-blue-700 text-white py-1 px-3 hover:bg-gray-700 hover:text-white"><a class="" href="#">1</a></li>
-                      <li class="bg-gray-100 py-1 px-3 hover:bg-gray-700 hover:text-white"><a class="" href="#">2</a></li>
-                      <li class="bg-gray-100 py-1 px-3 hover:bg-gray-700 hover:text-white"><a class="" href="#">3</a></li>
-                      <li class="bg-gray-100 py-1 px-3 hover:bg-gray-700 hover:text-white"><a class="" href="#">Next</a></li>
-                    </ul>
-                </nav>
             </main>
         </div>
     </div>

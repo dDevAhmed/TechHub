@@ -14,14 +14,8 @@ class AppController extends Controller
         return view('home');
     }
 
-
-    public function liveSearch(Request $request)
-    {
-        $query = $request->get('query');
-
-        // Perform your search logic here
-        $results = JobListing::where('title', 'like', '%' . $query . '%')->get();
-
-        return response()->json($results);
+    public function search(){
+        return view('search');
     }
+
 }

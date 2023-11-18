@@ -44,7 +44,7 @@ use App\Http\Controllers\JobListingController;
 
 // app domains
 Route::get('/', [AppController::class, 'home'])->name('home');
-Route::get('/search', [AppController::class, 'liveSearch'])->name('live.search');
+Route::get('/search', [AppController::class, 'search'])->name('search');
 
 
 // job listing routes

@@ -8,79 +8,92 @@
                 updated.</p>
 
             <div class="border border--gray-500 shadow-lg flex items-center mt-12 p-0">
-                <i class="fa-solid fa-search p-3 bg-white"></i>
-                <input type="text" name="" id="searchInput" class="p-2 flex-grow outline-none"
-                    placeholder="search for jobs, books, communities and more..." autofocus>
+                <i class="fa-solid fa-search p-3 text-gray-700"></i>
+                <input type="text" name="searchInput" id="searchInput" class="p-2 flex-grow outline-none"
+                    placeholder="search for jobs, resources, communities and more..." onfocus="this.val='' " autofocus>
                 <button id="searchButton"
                     class="bg-gray-100 font-semibold px-5 py-2 hover:bg-blue-700 hover:text-white m-0">Search</button>
             </div>
 
-            <ul id="searchResults"></ul>
+            <div id="search_list"></div>
 
             {{-- cards --}}
             <div class="flex gap-4 justify-between mt-10">
-                <div class="shadow-md p-5 item-center">
-                    <i class="fa-solid fa-search"></i>
+                <div class="shadow-md p-5 item-center flex-1">
+                    <i class="fa-solid fa-suitcase"></i>
                     <h3 class="font-semibold mt-3 text-blue-700">Get Hired</h3>
-                    <p class="text-gray-600">Find cool Jobs that suit your needs...</p>
+                    <p class="text-gray-700">Find cool jobs with innovative companies.</p>
                 </div>
-                <div class="shadow-md p-5 items-center ">
+                <div class="shadow-md p-5 items-center flex-1">
                     <i class="fa-solid fa-users"></i>
                     <h3 class="font-semibold mt-3 text-blue-700">Share Ideas</h3>
-                    <p class="text-gray-600">Network and build cool stuffs with like minded...</p>
+                    <p class="text-gray-700">Network and build cool tech projects.</p>
                 </div>
-                <div class="shadow-md p-5 items-center ">
+                <div class="shadow-md p-5 items-center flex-1">
                     <i class="fa-solid fa-newspaper"></i>
                     <h3 class=" font-semibold mt-3 text-blue-700">Stay Updated</h3>
-                    <p class="text-gray-600">Follow the latest happenings in the industry...</p>
+                    <p class="text-gray-700">Stay ahead of the curve with real-time updates.</p>
                 </div>
             </div>
         </div>
     </div>
 
 
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script>
+    {{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script> --}}
+    {{-- <script>
         $(document).ready(function() {
-            $('#searchInput').on('input', function() {
-                const query = $(this).val();
-                fetchSearchResults(query);
-            });
+            $('#search').on('keyup', function() {
+                var query = $(this).val();
 
-            $('#searchButton').on('click', function() {
-                const query = $('#searchInput').val();
-                fetchSearchResults(query);
-            });
-
-            function fetchSearchResults(query) {
-                if (query.length > 2) {
                     $.ajax({
                         url: '/search',
                         type: 'GET',
                         data: {
-                            query: query
+                            'search': query
                         },
                         success: function(data) {
-                            displayResults(data);
+                            $('search_list').html(data);
                         }
                     });
-                } else {
-                    $('#searchResults').empty();
-                }
-            }
 
-            function displayResults(results) {
-                const list = $('#searchResults');
-                list.empty();
+                // fetchSearchResults(query);
+            });
 
-                if (results.length > 0) {
-                    results.forEach(function(result) {
-                        list.append('<li>' + result.title + '</li>');
-                    });
-                } else {
-                    list.append('<li>No results found</li>');
-                }
-            }
+            // $('#searchButton').on('click', function() {
+            //     const query = $('#searchInput').val();
+            //     fetchSearchResults(query);
+            // });
+
+            // function fetchSearchResults(query) {
+            //     if (query.length > 2) {
+            //         $.ajax({
+            //             url: '/search',
+            //             type: 'GET',
+            //             data: {
+            //                 query: query
+            //             },
+            //             success: function(data) {
+            //                 displayResults(data);
+            //             }
+            //         });
+            //     } else {
+            //         $('#searchResults').empty();
+            //     }
+            // }
+
+            // function displayResults(results) {
+            //     const list = $('#searchResults');
+            //     list.empty();
+
+            //     if (results.length > 0) {
+            //         results.forEach(function(result) {
+            //             list.append('<li>' + result.title + '</li>');
+            //         });
+            //     } else {
+            //         list.append('<li>No results found</li>');
+            //     }
+            // }
         });
-    </script>
+    </script> --}}
 @endsection

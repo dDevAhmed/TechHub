@@ -23,7 +23,7 @@
     <nav class="flex items-center justify-between flex-wrap bg-blue-700 p-6 shadow-lg sticky top-0 z-10">
         <div class="flex items-center text-white">
             <a href="/">
-                <img src="{{ asset('/assets/img/logo_landscape.png') }}" alt="TechHub Logo" class="h-10">
+                <img src="{{ asset('/assets/img/logo_landscape.png') }}" alt="TechHub Logo" class="h-8">
                 {{-- fixme - logo size --}}
             </a>
         </div>
@@ -31,15 +31,15 @@
             <a href="/"
                 class="block mt-4 sm:inline-block sm:mt-0  hover:border-b-2 hover:inline hover:py-2 mr-4 text-white font-bold">Home</a>
             <a href="/jobs"
-                class="block mt-4 sm:inline-block sm:mt-0  hover:border-b-2 hover:inline hover:py-2 mr-4 text-gray-300">Jobs</a>
+                class="block mt-4 sm:inline-block sm:mt-0  hover:border-b-2 hover:inline hover:py-2 mr-4 text-gray-100">Jobs</a>
             <a href="#"
-                class="block mt-4 sm:inline-block sm:mt-0  hover:border-b-2 hover:inline hover:py-2 mr-4 text-gray-300">Resources</a>
+                class="block mt-4 sm:inline-block sm:mt-0  hover:border-b-2 hover:inline hover:py-2 mr-4 text-gray-100">Resources</a>
             <a href="#"
-                class="block mt-4 sm:inline-block sm:mt-0  hover:border-b-2 hover:inline hover:py-2 mr-4 text-gray-300">Community</a>
+                class="block mt-4 sm:inline-block sm:mt-0  hover:border-b-2 hover:inline hover:py-2 mr-4 text-gray-100">Community</a>
             <a href="#"
-                class="block mt-4 sm:inline-block sm:mt-0  hover:border-b-2 hover:inline hover:py-2 mr-4 text-gray-300">Blog</a>
+                class="block mt-4 sm:inline-block sm:mt-0  hover:border-b-2 hover:inline hover:py-2 mr-4 text-gray-100">Blog</a>
         </div>
-        <div class="text-gray-300 text-md flex gap-4 items-center">
+        <div class="text-gray-100 text-md flex gap-4 items-center">
             <a href="#" target="_blank" title="Github"
                 class="hover:text-white hover:scale-150 hover:transition(3s)"><i class="fa-brands fa-github"></i></a>
             <a href="#" target="_blank" title="Twiiter"

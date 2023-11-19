@@ -21,13 +21,6 @@ class JobListingController extends Controller
     // show all listings
     public function index()
     {
-        // $jobListings = DB::table('job_listings')
-        //     ->where('is_active', 1)->get()->sortDesc();
-
-        // return view('job-listings', [
-        //     'jobListings' => $jobListings
-        // ]);
-
         $jobListings = JobListing::orderBy('created_at', 'desc')
         ->where('is_active', 1)
         ->paginate(10);

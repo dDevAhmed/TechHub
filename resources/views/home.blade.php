@@ -72,15 +72,6 @@
 
             });
 
-            $('#searchButton').on('click', function() {
-                var searchQuery = $searchInput.val();
-
-                if (searchQuery !== '') {
-                    // Redirect to results page with the search query
-                    window.location.href = '/search?query=' + searchQuery;
-                }
-            });
-
             function updateSuggestionsList() {
                 $suggestionList.empty();
 

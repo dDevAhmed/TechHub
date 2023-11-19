@@ -3,7 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Blog;
+use App\Models\Community;
 use App\Models\JobListing;
+use App\Models\TheResource;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -21,6 +24,9 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         JobListing::factory(50)->create();
+        TheResource::factory(10)->create();
+        Community::factory(10)->create();
+        Blog::factory(10)->create();
 
     }
 }

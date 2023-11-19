@@ -28,17 +28,12 @@
             </a>
         </div>
         <div class="text-md">
-            <a href="/"
-                class="block mt-4 sm:inline-block sm:mt-0  hover:border-b-2 hover:inline hover:py-2 mr-4 text-white font-bold">Home</a>
-            <a href="/jobs"
-                class="block mt-4 sm:inline-block sm:mt-0  hover:border-b-2 hover:inline hover:py-2 mr-4 text-gray-100">Jobs</a>
-            <a href="#"
-                class="block mt-4 sm:inline-block sm:mt-0  hover:border-b-2 hover:inline hover:py-2 mr-4 text-gray-100">Resources</a>
-            <a href="#"
-                class="block mt-4 sm:inline-block sm:mt-0  hover:border-b-2 hover:inline hover:py-2 mr-4 text-gray-100">Community</a>
-            <a href="#"
-                class="block mt-4 sm:inline-block sm:mt-0  hover:border-b-2 hover:inline hover:py-2 mr-4 text-gray-100">Blog</a>
-        </div>
+            <a href="/" class="{{ request()->is('/') ? 'text-white font-bold' : 'text-gray-100' }} block mt-4 sm:inline-block sm:mt-0  hover:border-b-2 hover:inline hover:py-2 mr-4">Home</a>
+            <a href="/jobs" class="{{ request()->is('jobs') ? 'text-white font-bold' : 'text-gray-100' }} block mt-4 sm:inline-block sm:mt-0  hover:border-b-2 hover:inline hover:py-2 mr-4">Jobs</a>
+            <a href="#" class="{{ request()->is('resources') ? 'text-white font-bold' : 'text-gray-100' }} block mt-4 sm:inline-block sm:mt-0  hover:border-b-2 hover:inline hover:py-2 mr-4">Resources</a>
+            <a href="#" class="{{ request()->is('community') ? 'text-white font-bold' : 'text-gray-100' }} block mt-4 sm:inline-block sm:mt-0  hover:border-b-2 hover:inline hover:py-2 mr-4">Community</a>
+            <a href="#" class="{{ request()->is('blog') ? 'text-white font-bold' : 'text-gray-100' }} block mt-4 sm:inline-block sm:mt-0  hover:border-b-2 hover:inline hover:py-2 mr-4">Blog</a>
+          </div>
         <div class="text-gray-100 text-md flex gap-4 items-center">
             <a href="#" target="_blank" title="Github"
                 class="hover:text-white hover:scale-150 hover:transition(3s)"><i class="fa-brands fa-github"></i></a>

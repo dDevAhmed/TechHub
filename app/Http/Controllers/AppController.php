@@ -41,16 +41,55 @@ class AppController extends Controller
     {
         $searchTerm = $request->get('query');
 
-        // Perform database query to fetch results based on the search term
-        $searchResults = DB::table('job_listings')
+        // Search job listings table
+        $jobSearchResults = DB::table('job_listings')
             ->where('title', 'like', '%' . $searchTerm . '%')
+            ->orWhere('description', 'like', '%' . $searchTerm . '%')
             ->get();
-        // ->orWhere('description', 'like', '%' . $searchTerm . '%')
 
+        // Search resources table
+        $resourceSearchResults = DB::table('resources')
+            ->where('title', 'like', '%' . $searchTerm . '%')
+            // ->orWhere('description', 'like', '%' . $searchTerm . '%')    //todo - or where explode tags like
+            ->orWhere('description', 'like', '%' . $searchTerm . '%')
+            ->get();
+
+        // Search communities table
+        $communitySearchResults = DB::table('communities')
+            ->where('title', 'like', '%' . $searchTerm . '%')
+            ->orWhere('description', 'like', '%' . $searchTerm . '%')
+            ->get();
+
+        // Search blogs table
+        $blogSearchResults = DB::table('blogs')
+            ->where('title', 'like', '%' . $searchTerm . '%')
+            ->orWhere('content', 'like', '%' . $searchTerm . '%')
+            ->get();
+
+        // Calculate counts for each table
+        $jobSearchCount = $jobSearchResults->count();
+        $resourceSearchCount = $resourceSearchResults->count();
+        $communitySearchCount = $communitySearchResults->count();
+        $blogSearchCount = $blogSearchResults->count();
+
+        // Combine search results and counts into an array
+        $searchResults = [
+            'job_listings' => $jobSearchResults,
+            'resources' => $resourceSearchResults,
+            'communities' => $communitySearchResults,
+            'blogs' => $blogSearchResults,
+            'counts' => [
+                'job_listings' => $jobSearchCount,
+                'resources' => $resourceSearchCount,
+                'communities' => $communitySearchCount,
+                'blogs' => $blogSearchCount,
+            ],
+        ];
+
+        // Return the view with search results and counts
         return view('results', [
-            'searchResults' => $searchResults, 
+            'searchResults' => $searchResults,
             'searchTerm' => $searchTerm,
-            // 'counts' => $searchResults->counts()
         ]);
     }
 }

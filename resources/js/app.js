@@ -72,6 +72,16 @@ $(document).ready(function () {
         }
     }
 
+    $('#searchButton').on('click', function() {
+        var searchQuery = $searchInput.val();
+
+        if (searchQuery !== '') {
+            // Redirect to results page with the search query
+            window.location.href = '/results?query=' + searchQuery;
+        }
+    });
+
+
     // jobListings page filter
     // $(document).ready(function () {
     $('#applyFilter').on('click', applyFilters);
@@ -86,8 +96,10 @@ $(document).ready(function () {
 
         // Apply filters to job listings
         $('.job-listing').each(function () {
-            const jobDate = $(this).data('date'); // Assuming each job listing has a 'data-date' attribute
-            // ... get other job attributes for comparison ...
+            const jobDate = $(this).data('created_at'); // Assuming each job listing has a 'data-created_at' attribute
+            const jobLocation = $(this).data('location'); 
+            const jobType = $(this).data('type');
+            const jobExperienceLevelDate = $(this).data('level'); 
 
             // Check if the job listing meets the filter criteria
             if (filterJob(jobDate, dateFilter) /* && ... other filter conditions ... */) {

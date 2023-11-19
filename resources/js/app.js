@@ -1,10 +1,19 @@
 import './bootstrap';
 
 
-$(document).ready(function() {
+$(document).ready(function () {
+    // remove dark class from HTML at the beginning
+    $('html').removeClass('dark');
+
+    // toggle dark mode
+    $('#lightModeToggler').on('click', function () {
+        $('html').toggleClass('dark');
+        $('#lightIcon').toggleClass('fa-moon', 'fa-sun'); // switch icon on toggle
+    });
+
 
     // home page search button goes to result page
-    $('#homeSearchButton').on('click', function() {
+    $('#homeSearchButton').on('click', function () {
         var searchQuery = $searchInput.val();
 
         if (searchQuery !== '') {
@@ -13,11 +22,12 @@ $(document).ready(function() {
         }
     });
 
+
     var $searchInput = $('#searchInput');
     var $suggestionList = $('#suggestionList');
     var suggestions = [];
 
-    $searchInput.on('keyup', function() {
+    $searchInput.on('keyup', function () {
         var searchQuery = $(this).val().toLowerCase();
 
         if (searchQuery === '') {
@@ -32,7 +42,7 @@ $(document).ready(function() {
             data: {
                 query: searchQuery
             },
-            success: function(response) {
+            success: function (response) {
                 suggestions = response.suggestions;
                 updateSuggestionsList();
             }
@@ -46,7 +56,7 @@ $(document).ready(function() {
         for (var i = 0; i < suggestions.length; i++) {
             var suggestion = suggestions[i];
             var suggestionItem = $('<li class="text-gray-700 cursor-pointer py-2">' + suggestion + '</li>');
-            suggestionItem.on('click', function() {
+            suggestionItem.on('click', function () {
                 $searchInput.val(suggestion);
                 $suggestionList.addClass('hidden');
 
@@ -61,4 +71,38 @@ $(document).ready(function() {
             $suggestionList.removeClass('hidden');
         }
     }
+
+    // jobListings page filter
+    // $(document).ready(function () {
+    $('#applyFilter').on('click', applyFilters);
+    // });
+
+    function applyFilters() {
+        // Get selected values from filters
+        const dateFilter = $('#dateFilter').val();
+        const locationFilter = $('#locationFilter').val();
+        const jobTypeFilter = $('#jobTypeFilter').val();
+        const experienceLevelFilter = $('#experienceLevelFilter').val();
+
+        // Apply filters to job listings
+        $('.job-listing').each(function () {
+            const jobDate = $(this).data('date'); // Assuming each job listing has a 'data-date' attribute
+            // ... get other job attributes for comparison ...
+
+            // Check if the job listing meets the filter criteria
+            if (filterJob(jobDate, dateFilter) /* && ... other filter conditions ... */) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    }
+
+    function filterJob(jobDate, dateFilter) {
+        // Implement your filtering logic here
+        // Return true if the job meets the criteria, false otherwise
+        // For example, you might parse the date strings and compare them
+        return true; // Placeholder, replace with your logic
+    }
+
 });

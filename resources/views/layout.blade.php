@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="">
 
 <head>
     <meta charset="UTF-8">
@@ -18,13 +18,13 @@
     @vite('resources/css/app.css')
 </head>
 
-<body class="font-sans w-full">
+<body class="font-sans w-full dark:bg-gray-950">
+    {{-- dark:bg-gray-950 --}}
     {{-- night mode = #1C1B22; --}}
     <nav class="flex items-center justify-between flex-wrap bg-blue-700 p-6 shadow-lg sticky top-0 z-10">
         <div class="flex items-center text-white">
             <a href="/">
                 <img src="{{ asset('/assets/img/logo.png') }}" alt="TechHub Logo" class="h-8">
-                {{-- fixme - logo size --}}
             </a>
         </div>
         <div class="text-md">
@@ -47,8 +47,7 @@
             <a href="#" target="_blank" title="Facebook"
                 class="hover:text-white hover:scale-150 hover:transition(3s)"><i class="fa-brands fa-facebook"></i></a>
                 |
-            <a href="#" target="_blank" title="Night Mode"
-                class="hover:text-white"><i class="fa-solid fa-moon"></i></a>
+            <button class=""  id="lightModeToggler" title="light mode"><i class="fa-solid fa-moon fa-sun" id="lightIcon"></i></button>
         </div>
     </nav>
 

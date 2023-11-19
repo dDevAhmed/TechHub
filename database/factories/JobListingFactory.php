@@ -21,7 +21,7 @@ class JobListingFactory extends Factory
             'title' => fake()->sentence(),
             'tags' => 'HTML/CSS, SQL, PHP',
             'company' => fake()->company(),
-            'location' => fake()->city(),
+            'location' => fake()->randomElement(['Remote', 'Abuja', 'Kaduna']),
             'type' => fake()->randomElement(['Full time', 'Part Time', 'Contract', 'Internship']),
             'level' => fake()->randomElement(['No Experience', 'Internship and Graduate', 'Entry Level', 'Mid Level', 'Senior Level', 'Executive']),
             'email' => fake()->companyEmail(),

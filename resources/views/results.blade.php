@@ -48,8 +48,8 @@
                             data-tab="jobs">
                             Jobs
                             <span
-                                class="inline-flex items-center justify-center w-4 h-4 ms-2 text-xs font-semibold text-white bg-gray-700 rounded-full">
-                                {{ $jobSearchCount }}
+                                class="inline-flex items-center justify-center w-5 h-5 ms-2 text-xs font-semibold text-white bg-gray-700 rounded-full">
+                                {{ $searchResults['counts']['job_listings']}}
                             </span>
                         </button>
                         <button class="tablinks inline-block p-4 border-b-2 border-e border-e-gray-300 w-full bg-gray-100"
@@ -57,7 +57,7 @@
                             Resources
                             <span
                                 class="inline-flex items-center justify-center w-4 h-4 ms-2 text-xs font-semibold text-white bg-gray-700 rounded-full">
-                                {{ $resourceSearchCount }}
+                                {{ $searchResults['counts']['resources'] }}
                             </span>
                         </button>
                         <button class="tablinks inline-block p-4 border-b-2 border-e border-e-gray-300 w-full bg-gray-100"
@@ -65,14 +65,14 @@
                             Communities
                             <span
                                 class="inline-flex items-center justify-center w-4 h-4 ms-2 text-xs font-semibold text-white bg-gray-700 rounded-full">
-                                {{ $communitySearchCount }}
+                                {{ $searchResults['counts']['communities'] }}
                             </span>
                         </button>
                         <button class="tablinks inline-block p-4 border-b-2 w-full bg-gray-100" data-tab="blogs">
                             Blogs
                             <span
                                 class="inline-flex items-center justify-center w-4 h-4 ms-2 text-xs font-semibold text-white bg-gray-700 rounded-full">
-                                {{ $blogSearchCount }}
+                                {{ $searchResults['counts']['blogs'] }}
                             </span>
                         </button>
                     </div>

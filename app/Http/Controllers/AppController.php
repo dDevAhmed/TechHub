@@ -48,9 +48,9 @@ class AppController extends Controller
             ->get();
 
         // Search resources table
-        $resourceSearchResults = DB::table('resources')
+        $resourceSearchResults = DB::table('the_resources')
             ->where('title', 'like', '%' . $searchTerm . '%')
-            // ->orWhere('description', 'like', '%' . $searchTerm . '%')    //todo - or where explode tags like
+            ->orWhere('tags', 'like', '%' . $searchTerm . '%') 
             ->orWhere('description', 'like', '%' . $searchTerm . '%')
             ->get();
 
@@ -58,12 +58,13 @@ class AppController extends Controller
         $communitySearchResults = DB::table('communities')
             ->where('title', 'like', '%' . $searchTerm . '%')
             ->orWhere('description', 'like', '%' . $searchTerm . '%')
+            ->orWhere('description', 'like', '%' . $searchTerm . '%')
             ->get();
 
         // Search blogs table
         $blogSearchResults = DB::table('blogs')
             ->where('title', 'like', '%' . $searchTerm . '%')
-            ->orWhere('content', 'like', '%' . $searchTerm . '%')
+            ->orWhere('description', 'like', '%' . $searchTerm . '%')
             ->get();
 
         // Calculate counts for each table

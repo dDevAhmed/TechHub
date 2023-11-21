@@ -23,8 +23,9 @@
     {{-- night mode = #1C1B22; --}}
     <nav class="flex items-center justify-between flex-wrap bg-blue-700 p-6 shadow-lg sticky top-0 z-10">
         <div class="flex items-center text-white">
-            <a href="/">
-                <img src="{{ asset('/assets/img/logo.png') }}" alt="TechHub Logo" class="h-8">
+            <a href="/" class="flex gap-3 items-center">
+                <img src="{{ asset('/assets/img/logo_glyph_no_bg.png') }}" alt="TechHub Logo" class="h-10 w-auto">
+                <h3 class="text-white font-bold text-2xl">TechHub</h3>
             </a>
         </div>
         <div class="text-md">
@@ -53,7 +54,7 @@
     </footer>
 
     @vite('resources/js/app.js')
-
+    {{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> --}}
 
 </body>
 

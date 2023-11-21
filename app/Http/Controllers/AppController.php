@@ -39,7 +39,12 @@ class AppController extends Controller
 
     public function results(Request $request)
     {
+        // $searchTerm = $request->get('query');
+
         $searchTerm = $request->get('query');
+        if ($request->has('tag')) {
+            $searchTerm .= ' ' . $request->get('tag');
+        }
 
         // Search job listings table
         $jobSearchResults = DB::table('job_listings')
@@ -50,7 +55,7 @@ class AppController extends Controller
         // Search resources table
         $resourceSearchResults = DB::table('the_resources')
             ->where('title', 'like', '%' . $searchTerm . '%')
-            ->orWhere('tags', 'like', '%' . $searchTerm . '%') 
+            ->orWhere('tags', 'like', '%' . $searchTerm . '%')
             ->orWhere('description', 'like', '%' . $searchTerm . '%')
             ->get();
 

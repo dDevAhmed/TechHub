@@ -5,8 +5,8 @@
     $trimmed_tags = array_map('trim', $tags)
 @endphp
 
-<div class="footer job-listing-tags-container mt-5">
+<div class="footer job-listing-tags-container">
     @foreach ($trimmed_tags as $tag)
-        <span><a href="/?tag={{$tag}}" class="font-semibold bg-blue-50 text-blue-700 py-1 px-2 text-xs rounded">{{$tag}}</a></span>
+        <span><a href="/results?tag={{$tag}}" class="font-semibold bg-blue-50 text-blue-700 py-1 px-2 text-xs rounded">{{$tag}}</a></span>
     @endforeach
 </div>

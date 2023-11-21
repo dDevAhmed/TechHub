@@ -23,6 +23,7 @@ $(document).ready(function () {
     });
 
 
+    // live search
     var $searchInput = $('#searchInput');
     var $suggestionList = $('#suggestionList');
     var suggestions = [];
@@ -71,16 +72,7 @@ $(document).ready(function () {
             $suggestionList.removeClass('hidden');
         }
     }
-
-    $('#searchButton').on('click', function() {
-        var searchQuery = $searchInput.val();
-
-        if (searchQuery !== '') {
-            // Redirect to results page with the search query
-            window.location.href = '/results?query=' + searchQuery;
-        }
-    });
-
+    
 
     // jobListings page filter
     // $(document).ready(function () {

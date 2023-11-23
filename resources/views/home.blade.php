@@ -3,18 +3,20 @@
 @section('content')
     <div class="p-5 h-full w-full ">
         <div class="w-3/5 m-auto mt-16 text-center">
-            <h1 class="text-blue-700 font-bold text-4xl">Welcome to <span>TechHub</span></h1>
-            <p class="text-md text-gray-600 mt-3 dark:text-gray-400">...the central hub for tech enthusiasts to connect, share, and stay
+            <h1 class="text-gray-700 font-bold text-5xl">Welcome to <span>TechHub</span></h1>
+            <p class="text-md text-gray-600 mt-3 dark:text-gray-400">...the central hub for tech enthusiasts to connect,
+                share, and stay
                 updated.</p>
 
             <div class="border shadow-lg dark:bg-gray-800 flex items-center mt-12 p-0">
                 <i class="fa-solid fa-search p-3 text-gray-700 dark:text-gray-300"></i>
-                <input type="text" name="searchInput" id="searchInput" class="p-2 flex-grow outline-none dark:bg-gray-800 dark:text-gray-400"
+                <input type="text" name="homeSearchInput" id="homeSearchInput"
+                    class="p-2 flex-grow outline-none dark:bg-gray-800 dark:text-gray-400"
                     placeholder="search for jobs, resources, communities and more..." onfocus="this.value=''" autofocus>
                 <button id="homeSearchButton"
                     class="bg-gray-100 dark:bg-gray-700 font-semibold px-5 py-2 hover:bg-blue-700 dark:hover:bg-blue-700 dark:text-gray-300 hover:text-white dark:hover:text-white m-0">Search</button>
-                <div id="searchSuggestions" class="absolute z-50 bg-white border border--gray-200 p-2 hidden">
-                    <ul id="suggestionList" class="list-none"></ul>
+                <div id="homeSearchSuggestions" class="absolute z-50 bg-white border border--gray-200 p-2 hidden">
+                    <ul id="homeSuggestionList" class="list-none"></ul>
                 </div>
             </div>
 
@@ -40,13 +42,14 @@
     </div>
 
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <script>
         $(document).ready(function() {
-            var $searchInput = $('#searchInput');
-            var $suggestionList = $('#suggestionList');
+            var $searchInput = $('#homeSearchInput');
+            var $suggestionList = $('#homeSuggestionList');
             var suggestions = [];
 
             $searchInput.on('keyup', function() {
@@ -61,15 +64,23 @@
                 $.ajax({
                     url: '/',
                     method: 'GET',
-                    data: {
+                    data: JSON.stringify({
                         query: searchQuery
-                    },
+                    }),
+                    contentType: 'application/json',
                     success: function(response) {
                         suggestions = response.suggestions;
+
+                        // Update suggestions list visibility
+                        if (suggestions.length > 0) {
+                            $suggestionList.removeClass('hidden');
+                        } else {
+                            $suggestionList.addClass('hidden');
+                        } 
+
                         updateSuggestionsList();
                     }
                 });
-
             });
 
             function updateSuggestionsList() {
@@ -88,11 +99,19 @@
 
                     $suggestionList.append(suggestionItem);
                 }
-
-                if (suggestions.length > 0) {
-                    $suggestionList.removeClass('hidden');
-                }
             }
+
+            // home page search button goes to result page
+            $('#homeSearchButton').on('click', function() {
+                var searchQuery = $searchInput.val();
+
+                if (searchQuery !== '') {
+                    // Redirect to results page with the search query
+                    window.location.href = '/results?query=' + searchQuery;
+                }
+            });
         });
     </script>
 @endsection
+
+

@@ -49,17 +49,10 @@ Route::get('/results', [AppController::class, 'results'])->name('results');
 
 // job listing routes
 Route::controller(JobListingController::class)->group(function () {
-    Route::get(
-        '/jobs',
-        'index'
-    )->name('job.index');
-
-    Route::get('/job/{job}', 'showJobListing')->name('job.showJobListing');
-    Route::get('/add-listing', 'createJobListing');
-    Route::post(
-        '/add-listing',
-        'storeJobListing'
-    )->name('job.store');
+    Route::get('/jobs', 'index')->name('job.index');
+    Route::get('/job/create', 'createJobListing')->name('job.create');
+    Route::get('/job/{job}', 'showJobListing')->name('job.listing');
+    // Route::post('/job/create', 'storeJobListing')->name('job.store');
 });
 
 

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="py-10 h-full w-4/5 m-auto flex gap-4">
-        <div class=" w-1/5">
+        <div class=" w-3/12">
             <aside class="sticky top-28">
                 <div class="shadow-md p-5 justify-center">
                     <img src="{{ asset('/assets/img/logo_glyph_no_bg.png') }}" alt="Job Listing Image" class="w-40 h-auto m-auto">
@@ -10,7 +10,7 @@
                 </div>
             </aside>
         </div>
-        <div class="w-4/5">
+        <div class="w-8/12">
             <main>
                 <div class="p-5 shadow-md">
                     <p class="header-level-2 flex gap-3 text-gray-700 mt-1">

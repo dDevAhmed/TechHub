@@ -28,7 +28,7 @@ class JobListingController extends Controller
         // Get the current page number
         $currentPage = $jobListings->currentPage();
 
-        return view('job-listings', [
+        return view('joblistings.listings', [
             'jobListings' => $jobListings,
             'currentPage' => $currentPage
         ]);
@@ -41,7 +41,7 @@ class JobListingController extends Controller
         $jobListing = DB::table('job_listings')
             ->where('job_id', $job_id)->first();
 
-        return view('job-listing', [
+        return view('joblistings.listing', [
             'jobListing' => $jobListing
         ]);
     }
@@ -49,7 +49,7 @@ class JobListingController extends Controller
     // show add listing form
     public function createJobListing()
     {
-        return view('add-job-listing');
+        return view('joblistings.create');
     }
 
     // store new listing in db

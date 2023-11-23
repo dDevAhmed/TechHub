@@ -79,7 +79,7 @@
                     @foreach ($jobListings as $jobListing)
                         <div class="shadow-md flex gap-3 p-5 mb-3 border-2 border-t-0 border-b-0 border-r-0 hover:border-s-blue-700 items-center"
                             id="job-listing-div">
-                            <div class=" w-1/6 h-auto justify-center"> {{-- fixme --}}
+                            <div class=" w-1/6 h-auto justify-center">
                                 <img src="{{ asset('/assets/img/logo_glyph_no_bg.png') }}" alt="Job Listing Image"
                                     class=" w-20 h-auto m-auto">
                             </div>

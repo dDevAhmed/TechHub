@@ -36,7 +36,7 @@
         </div>
         <div class="w-3/4" id="center_container">
             <main class="shadow-md">
-                <div class="bg-white pb-3 sticky top-28"> {{-- fixme - top scale --}}
+                <div class="bg-white pb-3 sticky top-20">
                     <div class="flex">
                         <button id="job_tab_button" class="tablinks inline-block p-4 border-e border-e-gray-300  w-full"
                             data-tab="jobs">
@@ -75,87 +75,94 @@
                     <div class="tabcontent p-4" id="jobs">
                         @if ($searchResults['job_listings']->count() > 0)
                             @foreach ($searchResults['job_listings'] as $searchResult)
-                                <div class="bg-gray-50 mb-3 p-3 hover:bg-blue-50">
-                                    <div class="flex">
-                                        <h3 class="text-md"><a href="/job/{{ $searchResult->job_id }}"
-                                                class="text-blue-700 font-semibold">{{ $searchResult->title }}</a></h3>
+                                <div class="bg-gray-50 mb-3 p-3 hover:bg-blue-50 flex items-center">
+                                    <div class=" w-1/6 h-auto justify-center">
+                                        <img src="{{ asset('/assets/img/logo_glyph_no_bg.png') }}" alt="Job Listing Image"
+                                            class="w-12 h-auto m-auto">
                                     </div>
-                                    <p class="text-sm flex gap-3 font-light mt-1">
-                                        <span><i class="fa-solid fa-building text-gray-700"></i>
-                                            {{ $searchResult->company }}</span>
-                                        |
-                                        <span><i class="fa-solid fa-map-marker-alt text-gray-700"></i>
-                                            {{ $searchResult->location }}</span>
-                                        |
-                                        <span><i class="fa-solid fa-suitcase text-gray-700"></i>
-                                            {{ $searchResult->type }}</span>
-                                    </p>
+                                    <div class="w-5/6">
+                                        <div class="flex">
+                                            <h3 class="text-md"><a href="/job/{{ $searchResult->job_id }}"
+                                                    class="text-blue-700 font-semibold">{{ $searchResult->title }}</a></h3>
+                                        </div>
+                                        <p class="text-sm flex gap-3 font-light mt-1 mb-3">
+                                            <span><i class="fa-solid fa-building text-gray-700"></i>
+                                                {{ $searchResult->company }}</span>
+                                            |
+                                            <span><i class="fa-solid fa-map-marker-alt text-gray-700"></i>
+                                                {{ $searchResult->location }}</span>
+                                            |
+                                            <span><i class="fa-solid fa-suitcase text-gray-700"></i>
+                                                {{ $searchResult->type }}</span>
+                                        </p>
+                                        < x-job-listing-tags :jobListingTagsCsv="$searchResult->tags" />
+                                    </div>
                                 </div>
                             @endforeach
                         @else
-                            <p class="m-auto text-center text-lg ">No results found for "{{ $searchTerm }}".</p>
+                            <p class="m-auto text-center text-lg ">No jobs found for "{{ $searchTerm }}".</p>
                         @endif
                     </div>
                     <div class="tabcontent p-4" id="resources">
-                        <h3><i class="fa-solid fa-book text-gray-700"></i> Resources</h3>
-
                         @if ($searchResults['resources']->count() > 0)
-                            @foreach ($searchResults['resources'] as $searchResult)
-                                <div class="bg-gray-50 mb-3 p-3 hover:bg-blue-50">
-                                    <div class="flex">
-                                        <h3 class="text-md"><a href="/resource/{{ $searchResult->resource_id }}"
-                                                class="text-blue-700 font-semibold">{{ $searchResult->title }}</a></h3>
-                                    </div>
-                                    <p class="text-sm flex gap-3 font-light mt-1">
-                                        <span><i class="fa-solid fa-book-open text-gray-700"></i>
-                                            {{ $searchResult->description }}</span>
-                                    </p>
-                                </div>
-                            @endforeach
+                            <div class="grid grid-cols-4 gap-4">
+                                @foreach ($searchResults['resources'] as $searchResult)
+                                    <a href="/resource/{{ $searchResult->resource_id }}" class="">
+                                        <div class="bg-gray-50 hover:bg-blue-50">
+                                            <img src="{{ asset('/assets/img/resource.png') }}" alt="resouce cover image"
+                                                class="w-full h-full">
+                                        </div>
+                                    </a>
+                                @endforeach
+                            </div>
                         @else
                             <p class="mt-auto text-center text-lg ">No resources found for "{{ $searchTerm }}".</p>
                         @endif
                     </div>
                     <div class="tabcontent p-4" id="communities">
-
-                        <div class="grid grid-cols-3 gap-3">
-                            @if ($searchResults['communities']->count() > 0)
+                        @if ($searchResults['communities']->count() > 0)
+                            <div class="grid grid-cols-3 gap-3">
                                 @foreach ($searchResults['communities'] as $searchResult)
                                     <a href="#" class="">
-                                        <div class="border-2 border-gray-300 hover:bg-blue-50">
-                                            <div class="h-3/5">
-                                                <img src="{{ asset('/assets/img/community.png') }}" alt="community backgroud image" class="w-full h-full">
+                                        <div class="border bg-gray-100 hover:bg-blue-50">
+                                            <div class="">
+                                                <img src="{{ asset('/assets/img/people_coding.jpeg') }}"
+                                                    alt="community background image" class="w-full">
                                             </div>
                                             <div class="p-3">
                                                 <h3 class="text-xl font-semibold">TechHub Community</h3>
-                                                <p class="text-sm font-light mt-1">
+                                                <p class="text-sm mt-1">
                                                     Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, sit.
                                                 </p>
                                             </div>
                                         </div>
                                     </a>
                                 @endforeach
-                            @else
-                                <p class="mt-auto text-center text-lg ">No communities found for "{{ $searchTerm }}".</p>
-                            @endif
-                        </div>
+                            </div>
+                        @else
+                            <p class="mt-auto text-center text-lg ">No communities found for "{{ $searchTerm }}".</p>
+                        @endif
                     </div>
                     <div class="tabcontent p-4" id="blogs">
-                        <h3><i class="fa-solid fa-users"></i> Blogs</h3>
-
                         @if ($searchResults['blogs']->count() > 0)
-                            @foreach ($searchResults['blogs'] as $searchResult)
-                                <div class="bg-gray-50 mb-3 p-3 hover:bg-blue-50">
-                                    <div class="flex">
-                                        <h3 class="text-md"><a href="/blog/{{ $searchResult->blog_id }}"
-                                                class="text-blue-700 font-semibold">{{ $searchResult->title }}</a></h3>
+                            <div class="grid grid-cols-3 gap-3">
+                                @foreach ($searchResults['blogs'] as $searchResult)
+                                <a href="#" class="">
+                                    <div class=" bg-gray-100 border hover:bg-blue-50">
+                                        <div class="">
+                                            <img src="{{ asset('/assets/img/seven_though_interview_questions.png') }}"
+                                                alt="blog cover image" class="w-full">
+                                        </div>
+                                        <div class="p-3">
+                                            <h3 class="text-xl font-semibold">7 though interview questions</h3>
+                                            <p class="text-sm mt-1">
+                                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, sit.
+                                            </p>
+                                        </div>
                                     </div>
-                                    <p class="text-sm flex gap-3 font-light mt-1">
-                                        <span><i class="fa-solid fa-user text-gray-700"></i>
-                                            {{ $searchResult->post_by }}</span>
-                                    </p>
-                                </div>
-                            @endforeach
+                                </a>
+                                @endforeach
+                            </div>
                         @else
                             <p class="mt-auto text-center text-lg ">No blogs found for "{{ $searchTerm }}".</p>
                         @endif
@@ -212,7 +219,7 @@
 
             // $('#results_page_search_button').on('click', function() {
             //     $('#center_container').slideToggle(700, 'swing');
-                
+
             // });
 
             // search button

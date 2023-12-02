@@ -10,6 +10,7 @@ class JobListing extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'tags', 'company', 'location', 'email', 'website', 'description'
+        'job_id', 'title', 'type', 'level', 'tags', 'summary', 'description', 'logo', 'company', 'location', 'email', 'website',  'user_id'
     ];
+
 }

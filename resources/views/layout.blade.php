@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="{{ asset('/assets/fontawesome/css/regular.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/fontawesome/css/brands.css') }}">
     {{-- <link rel="stylesheet" href="{{ asset('/assets/fontawesome/webfonts/fa-regular-400.woff2') }}"> --}}
+    {{-- richtext editor --}}
+    <link rel="stylesheet" href="{{ asset('/assets/richtexteditor/rte_theme_default.css') }}">
 
     @vite('resources/css/app.css')
 </head>
@@ -28,24 +30,101 @@
                 <h3 class="text-gray-100 font-bold text-2xl">TechHub</h3>
             </a>
         </div>
-        <div class="text-md">
-            <a href="/" class="{{ request()->is('/') ? 'text-white font-bold' : 'text-gray-100' }} block mt-4 sm:inline-block sm:mt-0  hover:border-b-2 hover:inline hover:py-2 mr-4">Home</a>
-            <a href="/jobs" class="{{ request()->is('jobs') ? 'text-white font-bold' : 'text-gray-100' }} block mt-4 sm:inline-block sm:mt-0  hover:border-b-2 hover:inline hover:py-2 mr-4">Jobs</a>
-            <a href="#" class="{{ request()->is('resources') ? 'text-white font-bold' : 'text-gray-100' }} block mt-4 sm:inline-block sm:mt-0  hover:border-b-2 hover:inline hover:py-2 mr-4">Resources</a>
-            <a href="#" class="{{ request()->is('community') ? 'text-white font-bold' : 'text-gray-100' }} block mt-4 sm:inline-block sm:mt-0  hover:border-b-2 hover:inline hover:py-2 mr-4">Community</a>
-            <a href="#" class="{{ request()->is('blog') ? 'text-white font-bold' : 'text-gray-100' }} block mt-4 sm:inline-block sm:mt-0  hover:border-b-2 hover:inline hover:py-2 mr-4">Blog</a>
+        <div class="text-md hidden md:block">
+            <a href="/"
+                class="{{ request()->is('/') ? 'text-white font-bold' : 'text-gray-100' }} block mt-4 sm:inline-block sm:mt-0  hover:border-b-2 hover:inline hover:py-2 mr-4">Home</a>
+            <a href="/jobs"
+                class="{{ request()->is('jobs') ? 'text-white font-bold' : 'text-gray-100' }} block mt-4 sm:inline-block sm:mt-0  hover:border-b-2 hover:inline hover:py-2 mr-4">Jobs</a>
+            <a href="#"
+                class="{{ request()->is('resources') ? 'text-white font-bold' : 'text-gray-100' }} block mt-4 sm:inline-block sm:mt-0  hover:border-b-2 hover:inline hover:py-2 mr-4">Resources</a>
+            <a href="#"
+                class="{{ request()->is('community') ? 'text-white font-bold' : 'text-gray-100' }} block mt-4 sm:inline-block sm:mt-0  hover:border-b-2 hover:inline hover:py-2 mr-4">Community</a>
+            <a href="#"
+                class="{{ request()->is('blog') ? 'text-white font-bold' : 'text-gray-100' }} block mt-4 sm:inline-block sm:mt-0  hover:border-b-2 hover:inline hover:py-2 mr-4">Blog</a>
         </div>
-        <div class="text-gray-100 text-md flex gap-4 items-center">
-            <a href="#" target="_blank" title="Github"
-                class="hover:text-white hover:scale-150 hover:transition(3s)"><i class="fa-brands fa-github"></i></a>
-            <a href="#" target="_blank" title="Twiiter"
-                class="hover:text-white hover:scale-150 hover:transition(3s)"><i class="fa-brands fa-twitter"></i></a>
-            <a href="#" target="_blank" title="Facebook"
-                class="hover:text-white hover:scale-150 hover:transition(3s)"><i class="fa-brands fa-facebook"></i></a>
+        <div class="hidden md:block">
+            <div class="text-gray-100 text-md flex gap-4 items-center">
+                <a href="#" target="_blank" title="Github"
+                    class="hover:text-white hover:scale-150 hover:transition(3s)"><i
+                        class="fa-brands fa-github"></i></a>
+                <a href="#" target="_blank" title="Twiiter"
+                    class="hover:text-white hover:scale-150 hover:transition(3s)"><i
+                        class="fa-brands fa-twitter"></i></a>
+                <a href="#" target="_blank" title="Facebook"
+                    class="hover:text-white hover:scale-150 hover:transition(3s)"><i
+                        class="fa-brands fa-facebook"></i></a>
                 |
-            <button class=""  id="lightModeToggler" title="light mode"><i class="fa-solid fa-moon fa-sun" id="lightIcon"></i></button>
+                <button class="" id="lightModeToggler" title="light mode"><i class="fa-solid fa-moon fa-sun"
+                        id="lightIcon"></i></button>
+            </div>
+        </div>
+
+        {{-- mobile nav toggler --}}
+        <button id="navToggle" class="block md:hidden">
+            <i class="fa-solid fa-bars text-white text-2xl"></i>
+        </button>
+    </nav>
+
+    {{-- mobilenav --}}
+
+    <div class="fixed top-0 left-0 z-50 w-full h-full bg-black opacity-75 hidden md:hidden" id="mobileBlackBg"></div>
+
+    <nav class="fixed top-0 left-0 z-50 bg-white p-6 shadow-lg w-60 h-full flex flex-col items-center transform -translate-x-full md:hidden"
+        id="mobileNav">
+        <div class="flex items-center justify-between flex-wrap">
+            <div class="flex items-center">
+                <a href="/" class="flex gap-3 items-center">
+                    <img src="{{ asset('/assets/img/logo_glyph_no_bg.png') }}" alt="TechHub Logo" class="h-10 w-auto">
+                    <h3 class="text-gray-700 font-bold text-2xl">TechHub</h3>
+                </a>
+            </div>
+            <button id="navClose" class="text-white text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <ul class="mt-6">
+            <li>
+                <a href="/"
+                    class="block mt-4 sm:inline-block sm:mt-0 hover:border-b-2 hover:inline hover:py-2 mr-4">Home</a>
+            </li>
+            <li>
+                <a href="/jobs"
+                    class="block mt-4 sm:inline-block sm:mt-0 hover:border-b-2 hover:inline hover:py-2 mr-4">Jobs</a>
+            </li>
+            <li>
+                <a href="#"
+                    class="block mt-4 sm:inline-block sm:mt-0 hover:border-b-2 hover:inline hover:py-2 mr-4">Resources</a>
+            </li>
+            <li>
+                <a href="#"
+                    class="block mt-4 sm:inline-block sm:mt-0 hover:border-b-2 hover:inline hover:py-2 mr-4">Community</a>
+            </li>
+            <li>
+                <a href="#"
+                    class="block mt-4 sm:inline-block sm:mt-0 hover:border-b-2 hover:inline hover:py-2 mr-4">Blog</a>
+            </li>
+        </ul>
+        <div class="text-gray-700 text-md flex gap-4 items-center mt-6">
+            <a href="#" target="_blank" title="Github"
+                class="hover:text-white hover:scale-150 hover:transition(3s)">
+                <i class="fa-brands fa-github"></i>
+            </a>
+            <a href="#" target="_blank" title="Twiiter"
+                class="hover:text-white hover:scale-150 hover:transition(3s)">
+                <i class="fa-brands fa-twitter"></i>
+            </a>
+            <a href="#" target="_blank" title="Facebook"
+                class="hover:text-white hover:scale-150 hover:transition(3s)">
+                <i class="fa-brands fa-facebook"></i>
+            </a>
+            |
+            <button class="" id="lightModeToggler" title="light mode">
+                <i class="fa-solid fa-moon fa-sun" id="lightIcon"></i>
+            </button>
         </div>
     </nav>
+
+    {{-- mobile nav --}}
 
     @yield('content')
 
@@ -54,7 +133,21 @@
     </footer>
 
     @vite('resources/js/app.js')
-    {{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> --}}
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $("#navToggle").click(function() {
+                $("#mobileNav").removeClass("-translate-x-full hidden");
+                $("#mobileBlackBg").removeClass("hidden");
+            });
+
+            $("#mobileBlackBg, #navClose").click(function() {
+                $("#mobileNav").addClass("-translate-x-full hidden");
+                $("#mobileBlackBg").addClass("hidden");
+            });
+        });
+    </script>
 
 </body>
 

@@ -15,19 +15,25 @@ return new class extends Migration
     {
         Schema::create('job_listings', function (Blueprint $table) {
             $table->id();
+
             $table->integer('job_id');
             $table->string('title');
-            $table->string('tags');
-            $table->string('company');
-            $table->string('location');
             $table->string('type');
             $table->string('level');
+            $table->string('tags');
+            $table->longText('summary');
+            $table->longText('description');
+
+            $table->string('logo')->nullable(); 
+            $table->string('company');
+            $table->string('location');
             $table->string('email');
             $table->string('website');
-            $table->longText('description');
-            $table->string('post_by');
-            // $table->boolean('is_active')->default(1);
-            $table->boolean('is_active');
+
+            
+            $table->foreignId('user_id');
+            $table->boolean('is_active')->default(1);
+            // $table->boolean('is_active');
             $table->timestamps();
         });
 

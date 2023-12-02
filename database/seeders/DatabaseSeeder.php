@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        JobListing::factory(50)->create();
+        JobListing::factory(10)->create();
         TheResource::factory(10)->create();
         Community::factory(10)->create();
         Blog::factory(10)->create();

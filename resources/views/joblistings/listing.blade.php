@@ -5,8 +5,8 @@
         <div class=" w-3/12">
             <aside class="sticky top-28">
                 <div class="shadow-md p-5 justify-center">
-                    <img src="{{ asset('/assets/img/logo_glyph_no_bg.png') }}" alt="Job Listing Image" class="w-40 h-auto m-auto">
-                    <h3 class="mt-3 text-gray-700 font-semibold text-center">{{ $jobListing->title }}</h3>
+                    <img src="{{ $jobListing->logo ? asset('/storage/'.$jobListing->logo) : asset('/assets/img/no-image-selected.png') }}" alt="Job Listing Image" class="w-28 h-auto m-auto">
+                    <h3 class="mt-5 text-gray-700 font-semibold text-center text-xl">{{ $jobListing->title }}</h3>
                 </div>
             </aside>
         </div>
@@ -21,7 +21,7 @@
                         <span><i class="fa-solid fa-suitcase"></i> {{ $jobListing->type }}</span>
                     </p>
                     <hr class="mt-2">
-                    <p class="mt-3 text-gray-700">{{ $jobListing->description }}</p>
+                    <p class="mt-3 text-gray-700">{!! $jobListing->description !!}</p>
                     <div class="mt-5"><x-job-listing-tags :jobListingTagsCsv="$jobListing->tags" /></div>
                     <div class="mt-5 flex gap-4">
                         <a href="mailto:{{ $jobListing->email }}" class="text-1xl bg-blue-700 py-2 px-5 flex-grow text-center text-white hover:bg-gray-700"><i class="fa-solid fa-envelope"></i>

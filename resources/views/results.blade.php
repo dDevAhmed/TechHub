@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="py-10 h-full w-4/5 m-auto flex gap-4">
-        <div class="w-1/5">
+        <div class="w-2/12">
             <aside class="sticky top-28"> {{-- fixme - top --}}
                 <div class="shadow-md p-5">
                     <h3 class="font-bold">Popular Tags</h5>
@@ -34,11 +34,11 @@
                 </div>
             </aside>
         </div>
-        <div class="w-3/4" id="center_container">
+        <div class="w-9/12" id="center_container">
             <main class="shadow-md">
                 <div class="bg-white pb-3 sticky top-20">
                     <div class="flex">
-                        <button id="job_tab_button" class="tablinks inline-block p-4 border-e border-e-gray-300  w-full"
+                        <button id="job_tab_button" class="tablinks inline-block p-4 border-e border-e-gray-300 w-full"
                             data-tab="jobs">
                             Jobs
                             <span
@@ -77,8 +77,8 @@
                             @foreach ($searchResults['job_listings'] as $searchResult)
                                 <div class="bg-gray-50 mb-3 p-3 hover:bg-blue-50 flex items-center">
                                     <div class=" w-1/6 h-auto justify-center">
-                                        <img src="{{ asset('/assets/img/logo_glyph_no_bg.png') }}" alt="Job Listing Image"
-                                            class="w-12 h-auto m-auto">
+                                        <img src="{{ $searchResult->logo ? asset('/storage/'.$searchResult->logo) : asset('/assets/img/no-image-selected.png') }}" alt="Job Listing Image"
+                                            class="w-20 h-auto m-auto">
                                     </div>
                                     <div class="w-5/6">
                                         <div class="flex">
@@ -170,7 +170,7 @@
                 </div>
             </main>
         </div>
-        <div class="">
+        <div class="w-1/12">
             <div class="rounded-full sticky top-28">
                 <input type="text" class="shadow-md -z-10 p-3 outline-none rounded-full relative -end-10 bg-red-200"
                     placeholder="enter your search keyword...">
@@ -182,7 +182,12 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script/> --}}
+    {{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> --}}
+    {{-- using the local scripts --}}
+    <script src="{{ asset('/assets/scripts/jquery-3.7.1.min.js') }}"></script>
+    {{-- <script src="{{ asset('/assets/scripts/typeahead.bundle.min.js') }}"></script> --}}
+    {{-- <script src="{{ asset('/assets/scripts/popper.min.js') }}"></script> --}}
     <script>
         $(document).ready(function() {
             $('#job_tab_button').addClass('border-white border-t-4 border-t-blue-700 bg-white');
@@ -215,6 +220,7 @@
 
             // Show the default tab content
             switchTabs('jobs');
+
 
 
             // $('#results_page_search_button').on('click', function() {

@@ -51,8 +51,8 @@ Route::get('/results', [AppController::class, 'results'])->name('results');
 Route::controller(JobListingController::class)->group(function () {
     Route::get('/jobs', 'index')->name('job.index');
     Route::get('/job/create', 'createJobListing')->name('job.create');
+    Route::post('/job/create', 'storeJobListing')->name('job.store');
     Route::get('/job/{job}', 'showJobListing')->name('job.listing');
-    // Route::post('/job/create', 'storeJobListing')->name('job.store');
 });
 
 

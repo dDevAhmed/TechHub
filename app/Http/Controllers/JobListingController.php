@@ -38,8 +38,7 @@ class JobListingController extends Controller
     public function showJobListing($job_id)
     {
         // $jobListing = JobListing::find($id);     //using the id column
-        $jobListing = DB::table('job_listings')
-            ->where('job_id', $job_id)->first();
+        $jobListing = JobListing::where('job_id', $job_id)->first();
 
         return view('joblistings.listing', [
             'jobListing' => $jobListing
@@ -55,17 +54,30 @@ class JobListingController extends Controller
     // store new listing in db
     public function storeJobListing(Request $request)
     {
-        $this->validate($request, [
+        $formFields = $request->validate([
+            'job_id' => 'required', 
             'title' => 'required',
+            'type' => 'required',
+            'level' => 'required',
             'tags' => 'required',
+            'summary' => 'required',
+            'description' => 'required',
+
+            // 'logo' => 'required',
             'company' => 'required',
             'location' => 'required',
-            'email' => 'required',
+            'email' => ['required', 'email'],
             'website' => 'required',
+            
+            'user_id' => 'required',
         ]);
 
-        JobListing::create($request->all());
-        return to_route('job.index');
+        if ($request->hasFile('logo')) {
+            $formFields['logo'] = $request->file('logo')->store('companies/logos', 'public');
+        }
+
+        JobListing::create($formFields);
+        return to_route('job.index')->with('success', 'Job listing added successfully');
     }
 
     // update listing form

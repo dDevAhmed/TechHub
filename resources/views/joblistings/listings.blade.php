@@ -77,10 +77,11 @@
             <main>
                 @unless ($jobListings->count() == 0)
                     @foreach ($jobListings as $jobListing)
-                        <div class="shadow-md flex gap-3 p-5 mb-3 border-2 border-t-0 border-b-0 border-r-0 hover:border-s-blue-700 items-center"
+                        <div class="shadow-md flex gap-3 p-5 mb-3 border-s-2 hover:border-s-blue-700 items-center"
                             id="job-listing-div">
                             <div class=" w-1/6 h-auto justify-center">
-                                <img src="{{ asset('/assets/img/logo_glyph_no_bg.png') }}" alt="Job Listing Image"
+                                {{-- todo - if no image use default --}}
+                                <img src="{{ $jobListing->logo ? asset('/storage/'.$jobListing->logo) : asset('/assets/img/no-image-selected.png') }}" alt="Job Listing Image"
                                     class=" w-20 h-auto m-auto">
                             </div>
                             <div class="w-5/6">
@@ -103,7 +104,7 @@
                                 {{-- php code for description ellipsis --}}
                                 @php
                                     // truncates the text
-                                    $text_shorten = mb_substr($jobListing->description, 0, mb_strpos($jobListing->description, ' ', 200));
+                                    $text_shorten = mb_substr($jobListing->summary, 0, mb_strpos($jobListing->summary, ' ', 50));
                                     // prevents last word truncation
                                     $text_truncated = trim(mb_substr($text_shorten, 0, mb_strrpos($text_shorten, ' ')));
                                     // Let's check if it ends in a comma or a dot.
@@ -174,5 +175,19 @@
 
             </main>
         </div>
+
+        <x-success-flash-message />
     </div>
+
+    {{-- <script>
+        $(document).ready(function() {
+            // Animate appearance
+            $('.flash-message').slideDown(500).delay(3000).slideUp(500);
+    
+            // Animate disappearance on close button click
+            $('.flash-message .close-button').click(function() {
+                $('.flash-message').slideUp(500);
+            });
+        });
+    </script> --}}
 @endsection

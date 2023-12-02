@@ -2,9 +2,9 @@
 
 @section('content')
     <div class="p-5 h-full w-full ">
-        <div class="w-3/5 m-auto mt-16 text-center">
-            <h1 class="text-gray-700 font-bold text-5xl">Welcome to <span>TechHub</span></h1>
-            <p class="text-md text-gray-600 mt-3 dark:text-gray-400">...the central hub for tech enthusiasts to connect,
+        <div class="w-3/5 m-auto mt-5 md:mt-8 text-center">
+            <h1 class="text-gray-700 font-bold text-3xl md:text-5xl dark:text-gray-300">Welcome to <span>TechHub</span></h1>
+            <p class="text-sm md:text-md text-gray-600 mt-3 dark:text-gray-400">...the central hub for tech enthusiasts to connect,
                 share, and stay
                 updated.</p>
 
@@ -42,9 +42,13 @@
     </div>
 
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+    {{-- using the local scripts --}}
+    <script src="{{ asset('/assets/scripts/jquery-3.7.1.min.js') }}"></script>
+    <script src="{{ asset('/assets/scripts/typeahead.bundle.min.js') }}"></script>
+    <script src="{{ asset('/assets/scripts/popper.min.js') }}"></script>
 
     <script>
         $(document).ready(function() {
@@ -107,7 +111,7 @@
 
                 if (searchQuery !== '') {
                     // Redirect to results page with the search query
-                    window.location.href = '/results?query=' + searchQuery;
+                    window.location.href = '/results?search=' + searchQuery;
                 }
             });
         });

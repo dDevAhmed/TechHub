@@ -41,14 +41,15 @@ class AppController extends Controller
     {
         // $searchTerm = $request->get('query');
 
-        $searchTerm = $request->get('query');
+        $searchTerm = $request->get('search');      //todo - combine with code above
         if ($request->has('tag')) {
-            $searchTerm .= ' ' . $request->get('tag');
+            $searchTerm = $request->get('tag');
         }
 
         // Search job listings table
         $jobSearchResults = DB::table('job_listings')
             ->where('title', 'like', '%' . $searchTerm . '%')
+            ->orWhere('tags', 'like', '%' . $searchTerm . '%')
             ->orWhere('description', 'like', '%' . $searchTerm . '%')
             ->get();
 
@@ -62,13 +63,14 @@ class AppController extends Controller
         // Search communities table
         $communitySearchResults = DB::table('communities')
             ->where('title', 'like', '%' . $searchTerm . '%')
-            ->orWhere('description', 'like', '%' . $searchTerm . '%')
+            ->orWhere('tags', 'like', '%' . $searchTerm . '%')
             ->orWhere('description', 'like', '%' . $searchTerm . '%')
             ->get();
 
         // Search blogs table
         $blogSearchResults = DB::table('blogs')
             ->where('title', 'like', '%' . $searchTerm . '%')
+            ->orWhere('tags', 'like', '%' . $searchTerm . '%')
             ->orWhere('description', 'like', '%' . $searchTerm . '%')
             ->get();
 
